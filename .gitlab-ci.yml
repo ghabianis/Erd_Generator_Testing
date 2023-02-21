@@ -1,0 +1,89 @@
+stages:
+  - test
+  - build-push
+  - deploy
+
+include:
+  # run template build and push
+  - project: "tekab-dev-team/config/gitlab-ci"
+    ref: "develop-v1"
+    file: "docker-template.yml"
+
+build:
+  extends:
+    - .build-push
+  variables:
+    API_URL: $API_URL
+    FO_PORT: $FO_PORT
+    SERVER_PORT: $SERVER_PORT
+    SITE_URL: $SITE_URL
+
+# Deployments
+deploy:staging:
+  extends:
+    - .deploy
+  environment: staging
+  needs:
+    - job: build
+
+deploy:production:
+  extends:
+    - .deploy
+  only:
+    - main
+  tags:
+    - tekab-prod
+  environment: production
+  needs:
+    - job: build
+# #-------------------- Nightwatch -----------------
+# #Testing pipeline using nightwatch credit tekabdev
+# image: node:14.19.0
+
+# cache:
+#   paths:
+#     - client-ui/node_modules/
+# test_async:
+#   stage: test
+#   tags:
+#     - build-runner-tekab
+#   before_script:
+#     - cd "$CI_PROJECT_DIR/client-ui"
+#     - sudo apt-get update -q -y
+#     - sudo apt-get --yes install xvfb
+#   script:
+#     # Installing Google Chrome
+#     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#     - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list
+#     - sudo apt-get update -q -y
+#     - sudo apt-get install -y google-chrome-stable
+#     # Install Node Version Manager (NVM) so we can change the node version
+#     - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+#     - ". ~/.nvm/nvm.sh"
+#     - nvm --version
+#     - nvm install 14
+
+#     # Installing chromedriver
+#     - npm --experimental-modules install chromedriver
+
+#     # Installing Geckodriver
+#     - npm install geckodriver
+
+#     # installing all the packages
+#     - npm install
+
+#     # Ensuring everything is installed
+#     - ./node_modules/.bin/chromedriver --version
+#     - ./node_modules/.bin/nightwatch --version
+#     - /usr/bin/google-chrome --version
+
+#     # Install display manager
+#     - sudo Xvfb -ac :99 -screen 0 1280x1024x16 &
+#     - export DISPLAY=:99
+
+#     # Run nightwatch tests
+#     - sudo apt-get update -y
+#     - npx nightwatch nightwatch-tests/ --env chrome
+
+#     # - false && true; exit_code=$?
+#     # - if [ $exit_code -ne 0 ]; then echo "Previous command failed"; fi;

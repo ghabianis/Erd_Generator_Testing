@@ -1,0 +1,8 @@
+SCHEMA=schema.prisma
+BACKUP=schema.prisma.backup
+
+echo 'Restoring backup and running `npx prisma generate` ... '
+mv "$BACKUP" "$SCHEMA"
+npx prisma generate
+
+echo 'Restoring backup and running `npx prisma generate` ... Done'

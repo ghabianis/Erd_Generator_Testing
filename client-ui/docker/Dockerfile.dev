@@ -1,0 +1,21 @@
+#--- Install node dependencies 
+FROM node:14.17.3-alpine3.14 as deps
+RUN echo "--- Install node dependencies  ---"
+# RUN apk add git
+WORKDIR /app
+
+COPY package.json ./
+COPY yarn.lock ./
+# COPY patches ./patches
+COPY .npmrc ./
+RUN yarn --check-files
+
+# --- RUN App
+FROM node:14.17.3-alpine3.14 as builder
+RUN echo "--- RUN App ---"
+# ENV NODE_ENV debug
+WORKDIR /app
+ADD . .
+COPY --from=deps /app/node_modules/ /app/node_modules/
+COPY --from=deps /app/package.json /app/yarn.lock /app/.npmrc /app/
+CMD ["npm", "run", "dev"]

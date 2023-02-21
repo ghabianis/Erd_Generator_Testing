@@ -1,0 +1,65 @@
+###################
+# BUILD FOR DEVELOPMENT
+###################
+# Use node as the base image
+FROM node:16.13.1-alpine3.14 as development
+# Update npm to version 7
+RUN npm i -g npm@8.1.2
+# Set the working directory
+WORKDIR /app
+# Copy files specifying dependencies
+COPY package.json  ./
+COPY yarn.lock ./
+COPY .npmrc ./
+# Install dependencies
+RUN yarn install --check-files;
+
+# Copy Prisma schema
+COPY prisma ./prisma
+# Copy all the files
+COPY . .
+# Generate Prisma client
+RUN npm run prisma:generate;
+
+
+
+
+
+
+###################
+# BUILD FOR PRODUCTION
+###################
+FROM node:16.13.1-alpine3.14 As build
+WORKDIR /app
+COPY package.json ./
+COPY yarn.lock ./
+# In order to run `npm run build` we need access to the Nest CLI which is a dev dependency. In the previous development stage we ran `npm ci` which installed all dependencies, so we can copy over the node_modules directory from the development image
+COPY  --from=development /app/node_modules ./node_modules
+COPY  . .
+# Build code
+RUN set -e; (npm run build)
+# Set NODE_ENV environment variable
+ENV NODE_ENV production
+# Running `yarn install --production --frozen-lockfile` removes the existing node_modules directory and passing in --production ensures that only the production dependencies are installed. This ensures that the node_modules directory is as optimized as possible
+RUN yarn install --production --frozen-lockfile && yarn cache clean --force
+
+
+
+###################
+# PRODUCTION
+###################
+FROM node:16.13.1-alpine3.14 As production
+WORKDIR /app
+COPY package.json ./
+COPY yarn.lock ./
+COPY prisma ./prisma/
+COPY scripts ./scripts
+COPY --from=build /app/dist/src/auth ./src/auth
+
+# Copy the bundled code from the build stage to the production image
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+
+# ENV SERVE_STATIC_ROOT_PATH=admin-ui/build
+# Start the server using the production build
+CMD [ "node", "dist/src/main.js"]

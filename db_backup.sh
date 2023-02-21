@@ -1,0 +1,1 @@
+docker container exec -e PGPASSWORD='postgres' -it web-application-db-1 pg_dump --inserts --column-inserts --username=postgres --host=db --port=5432 postgres > dbbackup.sql

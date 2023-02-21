@@ -1,0 +1,92 @@
+{
+  "welcome": "Bonjour, Bienvenue à la page d'accueil !",
+  "users": "Utlisateurs",
+  "usersManagement": "Gestion des utlisateurs",
+  "login": {
+    "title": "Connexion",
+    "newHere": "Nouveau ici",
+    "register": "Créer un compte",
+    "or": "ou"
+  },
+  "messages": {
+    "loginFailed": "Veuillez vérifier votre email et votre mot de passe",
+    "signUpFailed": "L'inscription a échoué",
+    "wrongConfirmPassword": "Confirmer le mot de passe est incorrect",
+    "shortPassword": "Le mot de passe doit contenir au moins 8 caractères"
+  },
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "confirmPassword": "Confirmez le mot de passe",
+  "firstName": "Prénom",
+  "lastName": "Nom",
+  "forgotPassword": "Mot de passe Oublié",
+  "signIn": "Se connecter",
+  "newPassword": "Nouveau Mot de passe",
+  "createAccount": "Créer un compte",
+  "role": "Role",
+  "alreadyHaveAnAccount": "Vous avez déjà un compte",
+  "signInRedirection": "Connectez-vous",
+  "signUp": "S'inscrire",
+  "signUpInterface": {
+    "title": "Créer un Compte",
+    "signUp": "S'identifier ici"
+  },
+  "submit": "Soumettre",
+  "cancel": "Annuler",
+  "resetPassword": "Réinitialiser le mot de passe",
+  "msgResetPasswordInterface": {
+    "title": "Réinitialiser Votre Mot de Passe",
+    "msg": "Veuillez visiter votre email, vous recevrez un email pour réinitialiser votre mot de passe."
+  },
+  "resetPasswordInterface": {
+    "title": "Réinitialiser Votre Mot de Passe",
+    "msg": "Entrez votre nouveau mot de passe"
+  },
+  "emailResetPasswordInterface": {
+    "title": "Mot de Passe Oublié",
+    "msg": "Saisissez votre email pour réinitialiser votre mot de passe"
+  },
+  "entityForm": {
+    "title": {
+      "create": "créer",
+      "edit": "editer"
+    },
+    "fields": {
+      "date": "Choisissez une date",
+      "time": "Choisissez une heure"
+    },
+    "buttonsContent": {
+      "confirm": "confirmer",
+      "cancel": "Annuler"
+    },
+    "validation": {
+      "required": "Ce champ est requis",
+      "length": "La longueur doit être d'au moins 3 caractères",
+      "NumberType": "Ce champ doit être un nombre",
+      "fileSize": "Taille maximale est 10 Mo",
+      "fileType": "Type de fichier non supporté"
+    }
+  },
+  "error404": {
+    "returnHome": "Rentrer à la page d'accueil",
+    "message": "On dirait qu'il n'y a rien ici"
+  },
+  "detail": {
+    "back": "back"
+  },
+  "entityList": {
+    "pagination": {
+      "display": "Affichage :",
+      "items": "Éléments",
+      "itemsPerPage": "Éléments par page"
+    }
+  },
+  "confirmModal": {
+    "deleteContent": "Êtes-vous sûr de vouloir supprimer",
+    "deleteTitle": "Suppression",
+    "buttonsContent": {
+      "confirm": "confirmer",
+      "cancel": "Annuler"
+    }
+  }
+}

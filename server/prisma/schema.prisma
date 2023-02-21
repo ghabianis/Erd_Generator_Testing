@@ -1,0 +1,35 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator prismaCRUDGenerator {
+  provider = "npx prisma-generator-crud"
+  output   = "./generated"
+}
+
+model AppConfig {
+  id        String    @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  value     String?
+  key       String?   @unique
+}
+
+model User {
+  id        String    @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  firstName String?
+  lastName  String?
+  username  String    @unique
+  password  String?
+  isValid   Boolean?
+  roles     String[]
+}

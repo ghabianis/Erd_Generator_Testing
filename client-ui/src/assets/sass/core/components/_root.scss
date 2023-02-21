@@ -1,0 +1,59 @@
+//
+// Root CSS Variables
+//
+:root {
+  // Theme colors
+  @each $name, $value in $theme-colors {
+    @if (theme-light-color($name)) {
+      --#{$variable-prefix}light-#{$name}: #{theme-light-color($name)};
+      --#{$variable-prefix}active-#{$name}: #{theme-active-color($name)};
+    }
+  }
+
+  // Gray colors
+  @each $name, $value in $grays {
+    --#{$variable-prefix}gray-#{$name}: #{$value};
+  }
+
+  // Breakpoints
+  @each $breakpoint, $value in $grid-breakpoints {
+    --#{$variable-prefix}#{$breakpoint}: #{$value};
+  }
+
+  --el-color-primary: #19204a;
+  --el-color-success: #50cd89;
+  --el-color-error: #f56c6c;
+  --el-color-warning: #ffc700;
+  --el-color-info: #909399;
+}
+body {
+  --el-color-white: #ffffff;
+  --el-color-black: #000000;
+  --el-color-primary: #19204a;
+  --el-color-primary-light-3: #5e6380;
+  --el-color-primary-light-5: #8c90a5;
+  --el-color-primary-light-7: #babcc9;
+  --el-color-primary-light-9: #e8e9ed;
+  --el-color-primary-dark-2: #141a3b;
+  --el-color-primary-transparent: #19204a11;
+  --el-color-success: #50cd89;
+  --el-color-success-light-3: #85dcac;
+  --el-color-success-light-5: #a8e6c4;
+  --el-color-success-light-7: #cbf0dc;
+  --el-color-success-light-9: #eefaf3;
+  --el-color-warning: #ffc700;
+  --el-color-warning-light-3: #ffd84d;
+  --el-color-warning-light-5: #ffe380;
+  --el-color-warning-light-7: #ffeeb3;
+  --el-color-warning-light-9: #fff9e6;
+  --el-color-danger: #f1416c;
+  --el-color-danger-light-3: #f57a98;
+  --el-color-danger-light-5: #f8a0b6;
+  --el-color-danger-light-7: #fbc6d3;
+  --el-color-danger-light-9: #feecf0;
+  --el-color-info: #909399;
+  --el-color-info-light-3: #b1b3b8;
+  --el-color-info-light-5: #c8c9cc;
+  --el-color-info-light-7: #dedfe0;
+  --el-color-info-light-9: #f4f4f5;
+}

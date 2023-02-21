@@ -1,0 +1,92 @@
+{
+  "welcome": "Hello User, Welcome on Home Page!",
+  "users": "users",
+  "usersManagement": "Users Managements",
+  "login": {
+    "title": "Sign In",
+    "newHere": "New here",
+    "register": "Register",
+    "or": "or"
+  },
+  "messages": {
+    "loginFailed": "Login failed please check your email and password",
+    "signUpFailed": "Sign Up failed",
+    "wrongConfirmPassword": "Confirm password is incorrect",
+    "shortPassword": "Password must contain at least 8 characters"
+  },
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "newPassword": "New password",
+  "forgotPassword": "Forgot password",
+  "signIn": "Sign In",
+  "createAccount": "Create account",
+  "role": "Role",
+  "alreadyHaveAnAccount": "Already have an account",
+  "signInRedirection": "Sign In",
+  "signUpInterface": {
+    "title": "Create an Account",
+    "signUp": "Sign Up"
+  },
+  "signUp": "Sign Up",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "resetPassword": "Reset password",
+  "msgResetPasswordInterface": {
+    "title": "Reset Password",
+    "msg": "Please check your email, you will receive email to reset your password"
+  },
+  "resetPasswordInterface": {
+    "title": "Reset Password",
+    "msg": "Enter your new password"
+  },
+  "emailResetPasswordInterface": {
+    "title": "Forgot Password",
+    "msg": "Enter your email to reset your password"
+  },
+  "entityForm": {
+    "title": {
+      "create": "create",
+      "edit": "edit"
+    },
+    "fields": {
+      "date": "Pick a date",
+      "time": "Pick a time"
+    },
+    "buttonsContent": {
+      "confirm": "confirm",
+      "cancel": "cancel"
+    },
+    "validation": {
+      "required": "This field is required",
+      "length": "Length should be at least 3 characters",
+      "NumberType": "this field must be a number",
+      "fileSize": "Max size 10Mo",
+      "fileType": "unsupported file type"
+    }
+  },
+  "error404": {
+    "returnHome": "Return Home",
+    "message": "Seems there is nothing here"
+  },
+  "detail": {
+    "back": "back"
+  },
+  "entityList": {
+    "pagination": {
+      "display": "Display :",
+      "items": "Items",
+      "itemsPerPage": "Items per page"
+    }
+  },
+  "confirmModal": {
+    "deleteContent": "Are you sure you want to delete",
+    "deleteTitle": "Delete",
+    "buttonsContent": {
+      "confirm": "confirm",
+      "cancel": "cancel"
+    }
+  }
+}

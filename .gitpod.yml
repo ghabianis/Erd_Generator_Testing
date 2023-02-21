@@ -1,0 +1,64 @@
+vscode:
+  extensions:
+    - znck.vue
+    - jock.svg
+    - Vue.volar
+    - lkrms.inifmt
+    - Prisma.prisma
+    - eamodio.gitlens
+    - dalirnet.vue-sort
+    - mhutchie.git-graph
+    - steoates.autoimport
+    - Gruntfuggly.todo-tree
+    - zardoy.vetur-extended
+    - dbaeumer.vscode-eslint
+    - TabNine.tabnine-vscode
+    - esbenp.prettier-vscode
+    - hollowtree.vue-snippets
+    - amodio.tsl-problem-matcher
+    - xabikos.JavaScriptSnippets
+    - wayou.vscode-todo-highlight
+    - eamodio.tsl-problem-matcher
+    - zardoy.ts-essential-plugins
+    - mubaidr.vuejs-extension-pack
+    - caponetto.vscode-diff-viewer
+    - formulahendry.auto-close-tag
+    - rvest.vs-code-prettier-eslint
+    - ms-vscode.vscode-typescript-next
+    - k--kato.intellij-idea-keybindings
+    - ms-azuretools.vscode-docker@1.22.2
+    - redwan-hossain.auto-rename-tag-clone
+    - pilotkid.lodash-import-what-you-need
+    - streetsidesoftware.code-spell-checker
+    - tombonnike.vscode-status-bar-format-toggle
+    - johnsoncodehk.vscode-typescript-vue-plugin
+    - streetsidesoftware.code-spell-checker-spanish
+
+gitConfig:
+  "pull.rebase": "false"
+
+tasks:
+  - name: install dependencies, populate .env file and setup process
+    command: |
+      cp .env.example .env
+      echo "SITE_URL=$(gp url 3001)" >> .env
+      echo "API_URL=$(gp url 8000)" >> .env
+      echo "GITPOD_WORKSPACE_URL=$(gp url 3001)" >> .env
+      chmod +x generate-open-api.sh
+      api_url=$(gp url 8000) ./generate-open-api.sh
+      sudo docker-compose cp vue-app-dev-client:/app/node_modules ./client-ui/
+      sudo docker-compose cp server-dev:/app/node_modules ./server/
+      gp sync-done setup
+
+  - name: serve prisma docs
+    init: gp sync-await setup # wait for the above process to finish
+    command: |
+      cd server/prisma/generated/docs && npx --yes serve -p 7777
+
+ports:
+  - port: 8000
+    visibility: public
+  - port: 3001
+    visibility: public
+  - port: 7777
+    visibility: public

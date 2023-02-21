@@ -1,0 +1,23 @@
+{
+  "root":true,
+  "env": {
+     "browser":true,
+     "es2021":true
+  },
+  "extends":[
+     "plugin:vue/vue3-essential",
+     "eslint:recommended",
+     "@vue/typescript/recommended",
+     "standard-with-typescript",
+     "plugin:vue/recommended"
+  ],
+  "parserOptions":{
+     "ecmaVersion":2020,
+     "project":"./tsconfig.json"
+  },
+  "rules":{
+     "@typescript-eslint/explicit-module-boundary-types":"off",
+     "@typescript-eslint/no-non-null-assertion":"off",
+     "no-undef":"error"
+  }
+}

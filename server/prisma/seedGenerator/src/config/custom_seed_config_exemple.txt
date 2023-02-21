@@ -1,0 +1,43 @@
+
+
+this file is an example for custom seed config
+
+EXEMPLE:
+{
+  "Entreprise": {
+    "fields-seed-type": {
+      "owner": "FullName"
+    }
+  },
+  "TestModel": {
+    "disable-gen": true
+  },
+  "AppConfig": {
+    "disable-gen-fields": ["value"]
+  },
+  "User": {
+    "fake-data-config": {
+      "DecimalNumber": "{\"min\": 0, \"max\": 10}",
+      "WholeNumber": "{\"min\": 0, \"max\": 10}",
+      "Paragraph": "2",
+      "Image": "640, 480",
+      "Phone": "+999 ## ### ###",
+      "Birthdate": "{ \"min\": 18, \"max\": 65, \"mode\": \"age\" }",
+      "String": "10",
+      "Future": "2",
+      "Past": "2",
+      "ZipCode": "####"
+    },
+    "seed-size": 10,
+    "fields-params": {
+      "phone": "+222 ## ### 000"
+    },
+    "fields-custom-option-sets": {
+      "gender": ["Male", "Female"]
+    },
+    "fields-static": {
+      "jsonData": "{\"key\": \"value\", \"key2\": 0}",
+      "password": "$2a$10$5I44NhOzny0.FNGeYAI6Ze/.YDPx2pplbZATojQ0qtFDtHelw3fc6"
+    }
+  }
+}

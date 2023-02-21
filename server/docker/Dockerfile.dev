@@ -1,0 +1,34 @@
+# Use node as the base image
+FROM node:16.13.1-alpine3.14
+
+# Update npm to version 7
+RUN npm i -g npm@8.1.2
+
+# Set the working directory
+WORKDIR /app
+
+
+# Copy files specifying dependencies
+COPY package.json  ./
+COPY yarn.lock ./
+
+# Install dependencies
+COPY .npmrc ./
+RUN yarn install --check-files;
+
+# Copy Prisma schema
+COPY prisma/schema.prisma ./prisma/
+
+# Generate Prisma client
+RUN yarn run prisma:generate;
+
+# Copy all the files
+COPY . .
+
+# Expose the port the server listens to
+EXPOSE 3005
+
+# Make server to serve admin built files
+# ENV SERVE_STATIC_ROOT_PATH=admin-ui/build
+
+CMD ["yarn" , "run" ,"start:debug"]

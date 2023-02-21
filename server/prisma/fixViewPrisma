@@ -1,0 +1,59 @@
+: '''
+This file runs the `prisma migrate dev` command with a workaround for the
+current lack of views support.
+
+It tries to solve this problem:
+If a database contains views and `prisma introspect` is run on it, Prisma will
+not recognize these views. Therefore, when running `prisma migrate dev`,
+the views will not be created.
+
+Prisma has a guide on how to handle this:
+https://www.prisma.io/docs/guides/general-guides/database-workflows/sql-views-postgres.
+
+Unfortunately, this introduces some headache when using `prisma migrate dev`
+from now on: Prisma will try to create these manually added models as relations
+which fails because they already exist as views.
+
+To workaround this, every manually created model for a view should be annotated
+with "/// @view".
+The script backups the current schema under `schema.prisma.backup` and then
+modifies the `schema.prisma` file by deleting these annotated models including
+their references. Afterwards, the file is restored and `prisma generate` is
+called to generate the Prisma client with these view models included.
+'''
+
+pwd 
+SCHEMA=/app/prisma/schema.prisma
+BACKUP=/app/prisma/schema.prisma.backup
+
+ANNOTATION="/// @view"
+
+cp "$SCHEMA" "$BACKUP"
+echo "Created backup for $SCHEMA at $BACKUP"
+
+echo -n "Detecting view models ... "
+view_models=$(grep "$ANNOTATION" -A 1 "$SCHEMA" | grep "model" | cut -d' ' -f2)
+echo "Done"
+echo "Detected view models: $view_models"  | tr '\n' ' '
+
+echo -n "Deleting view model references ... "
+for model in $view_models; do
+  sed -i "/$model/d" "$SCHEMA"
+done
+echo "Done"
+
+echo -n "Deleting view models ... "
+sed -i "/${ANNOTATION//\//\\/}/,/}/d" "$SCHEMA"
+echo "Done"
+
+cat $SCHEMA
+
+echo 'Running `prisma migrate dev` ... '
+yes | npx prisma migrate dev --name migrationdata
+echo 'Running `prisma migrate dev` ... Done'
+
+echo 'Restoring backup and running `npx prisma generate` ... '
+mv "$BACKUP" "$SCHEMA"
+npx prisma generate
+
+echo 'Restoring backup and running `npx prisma generate` ... Done'

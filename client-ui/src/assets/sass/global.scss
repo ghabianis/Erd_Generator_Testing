@@ -1,0 +1,60 @@
+.modals {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+}
+
+.badge-light-1 {
+  color: $color-yellow;
+  background-color: $warning-100;
+}
+.badge-light-2 {
+  color: $color-blue;
+  background-color: ($primary-100);
+}
+.badge-light-3 {
+  color: $color-green;
+  background-color: ($danger-100);
+}
+.badge-light-4 {
+  color: $color-red;
+  background-color: ($info-100);
+}
+.badge-light-5 {
+  color: $color-black;
+  background-color: ($success-100);
+}
+.body-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.rounded-sm {
+  border-radius: 6px;
+}
+.rounded-lg {
+  border-radius: 12px;
+}
+@media (max-width: 1200px) {
+  .body-container {
+    max-width: 100%;
+    margin-left: 0px;
+    margin-right: 10px;
+  }
+}
+
+.bg-bullet {
+  background-color: #e4e6ef !important;
+}
+.table > :not(:first-child) {
+  border-top: none;
+}
+.el-form-item{
+  margin-bottom: 0.75rem;
+}
+.el-form-item__content {
+  line-height: unset;
+}

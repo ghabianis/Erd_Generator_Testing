@@ -1,0 +1,32 @@
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': $primary-500,
+    ),
+  )
+);
+@use "element-plus/theme-chalk/src/index.scss" as *;
+
+.el-select .el-select__tags-text {
+  color: #5E6278;
+  font-weight: 700;
+}
+.el-select__tags {
+  .el-tag {
+    background-color: #F5F8FA;
+  }
+}
+.el-input__inner,
+.el-textarea__inner {
+  background-color: #e9ecef;
+  color:#464E5F;
+  min-height: 35px ;
+}
+.el-radio__inner {
+  background-color: #e9ecef;
+}
+.el-tag,
+.el-button {
+  border-style: none;
+}
